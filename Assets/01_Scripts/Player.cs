@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        RotateToMouse();
+
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
 
@@ -27,6 +29,15 @@ public class Player : MonoBehaviour
             Shoot();
         }
 
+    }
+
+    private void RotateToMouse()
+    {
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            Vector3 lookAt = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            transform.LookAt(lookAt);
+        }
     }
 
     void Shoot()
