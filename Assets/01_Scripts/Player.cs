@@ -33,8 +33,12 @@ public class Player : MonoBehaviour
 
     private void RotateToMouse()
     {
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
         {
+            Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
             Vector3 lookAt = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             transform.LookAt(lookAt);
         }
