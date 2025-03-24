@@ -61,8 +61,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.41f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Compile Include="Assets\01_Scripts\Player.cs" />
     <Compile Include="Assets\01_Scripts\Bullet.cs" />
+=======
+>>>>>>> Stashed changes
     <Compile Include="Assets\ComponentToAdd.cs" />
   </ItemGroup>
   <ItemGroup>
