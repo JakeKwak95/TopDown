@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     public float speed = 1f;
 
+    public int hp = 10;
+
     float x;
     float z;
 
@@ -47,5 +49,18 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, transform.rotation);
+    }
+
+    public void GetDamage()
+    {
+        hp--;
+
+        Debug.Log(hp);
+
+        if (hp <= 0)
+        {
+            Debug.Log("Dead");
+            Destroy(gameObject);
+        }
     }
 }
