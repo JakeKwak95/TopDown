@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\01_Scripts\Player.cs" />
     <Compile Include="Assets\01_Scripts\Bullet.cs" />
+    <Compile Include="Assets\01_Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\01_Scripts\Enemy.cs" />
     <Compile Include="Assets\ComponentToAdd.cs" />
   </ItemGroup>
