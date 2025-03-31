@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -7,17 +8,19 @@ public class Enemy : MonoBehaviour
 
     public int hp = 10;
 
+    NavMeshAgent agent;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player.transform.position);
-        transform.position += transform.forward * speed * Time.deltaTime;
+        agent.SetDestination(player.transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
