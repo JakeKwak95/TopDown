@@ -15,8 +15,12 @@ public class Player : MonoBehaviour
 
     NavMeshAgent agent;
 
+    Animator animator;
+
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
+
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
     }
@@ -31,7 +35,6 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
-
     }
 
     private void Move()
@@ -49,6 +52,8 @@ public class Player : MonoBehaviour
         {
             agent.SetDestination(transform.position + direction);
         }
+
+        animator.SetBool("IsRunning", direction.magnitude != 0);
     }
 
     private void RotateToMouse()
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         Instantiate(bulletPrefab, firePosition.position, transform.rotation);
+        animator.SetTrigger("Shoot");
     }
 
     public void GetDamage()

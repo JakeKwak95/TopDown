@@ -10,9 +10,13 @@ public class Enemy : MonoBehaviour
 
     NavMeshAgent agent;
 
+    Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
+        animator.SetFloat("Speed", speed);
+
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
     }
