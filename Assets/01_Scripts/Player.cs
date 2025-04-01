@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -12,25 +13,42 @@ public class Player : MonoBehaviour
     float x;
     float z;
 
+    NavMeshAgent agent;
+
     void Start()
     {
-
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = speed;
     }
 
     void Update()
     {
         RotateToMouse();
 
-        x = Input.GetAxis("Horizontal");
-        z = Input.GetAxis("Vertical");
-
-        transform.position += new Vector3(x, 0, z) * speed * Time.deltaTime;
+        Move();
 
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
 
+    }
+
+    private void Move()
+    {
+        x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
+
+        Vector3 direction = new Vector3(x, 0, z).normalized;
+
+        if (direction.magnitude == 0)
+        {
+            agent.SetDestination(transform.position);
+        }
+        else
+        {
+            agent.SetDestination(transform.position + direction);
+        }
     }
 
     private void RotateToMouse()
