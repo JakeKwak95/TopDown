@@ -11,9 +11,18 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent;
 
     Animator animator;
+
+    public SoundPlayer soundPlayer;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
+
+    ParticleSystem hitEffect;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        hitEffect = GetComponentInChildren<ParticleSystem>();
+
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat("Speed", speed);
 
@@ -33,7 +42,7 @@ public class Enemy : MonoBehaviour
         {
             GetDamage();
         }
-        else if(other.CompareTag("Player"))
+        else if (other.CompareTag("Player"))
         {
             player.GetDamage();
             Destroy(gameObject);
@@ -43,13 +52,14 @@ public class Enemy : MonoBehaviour
     public void GetDamage()
     {
         hp--;
-
-        Debug.Log(hp);
+        soundPlayer.PlaySFX(hitSound);
+        hitEffect.Play();
 
         if (hp <= 0)
         {
-            Debug.Log("Dead");
+            hitEffect.transform.SetParent(null);
             Destroy(gameObject);
+            soundPlayer.PlaySFX(deathSound);
         }
     }
 }

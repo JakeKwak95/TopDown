@@ -4,6 +4,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public Enemy[] enemyPrefabs;
     public Player player;
+    public SoundPlayer soundPlayer;
 
     public float spawnTime = 1f;
     float timer;
@@ -24,5 +25,6 @@ public class EnemySpawner : MonoBehaviour
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
         Enemy enemy = Instantiate(enemyPrefabs[randomIndex], transform.position, transform.rotation);
         enemy.player = player;
+        enemy.soundPlayer = soundPlayer;
     }
 }
