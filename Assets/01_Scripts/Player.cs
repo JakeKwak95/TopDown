@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.isGameStarted == false)
+        {
+            return;
+        }
+
         RotateToMouse();
 
         Move();
@@ -85,6 +90,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Dead");
             Destroy(gameObject);
+
+            GameManager.instance.OnLose();
         }
     }
 }

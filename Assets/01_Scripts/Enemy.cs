@@ -33,6 +33,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.isGameStarted == false)
+        {
+            agent.enabled = false;
+            return;
+        }
+
         agent.SetDestination(player.transform.position);
     }
 
@@ -60,6 +66,8 @@ public class Enemy : MonoBehaviour
             hitEffect.transform.SetParent(null);
             Destroy(gameObject);
             soundPlayer.PlaySFX(deathSound);
+
+            GameManager.instance.OnEnemyDie();
         }
     }
 }
