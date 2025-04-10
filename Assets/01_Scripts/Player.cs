@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float speed = 1f;
 
     public int hp = 10;
+    int maxHp;
+    public HUDManager hudManager;
 
     float x;
     float z;
@@ -23,6 +25,9 @@ public class Player : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
+
+        maxHp = hp;
+        hudManager.UpdateHealthBar(maxHp, hp);
     }
 
     void Update()
@@ -84,11 +89,10 @@ public class Player : MonoBehaviour
     {
         hp--;
 
-        Debug.Log(hp);
+        hudManager.UpdateHealthBar(maxHp, hp);
 
         if (hp <= 0)
         {
-            Debug.Log("Dead");
             Destroy(gameObject);
 
             GameManager.instance.OnLose();
